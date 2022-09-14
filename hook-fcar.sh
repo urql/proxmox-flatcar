@@ -103,7 +103,7 @@ if [[ "${phase}" == "pre-start" ]]; then
 	echo -e "# This file is generated at pre-start. Do not edit manualy.\n" > ${FCAR_FILES_PATH}/${vmid}.yaml
 	
 	if [[ $(qm cloudinit dump ${vmid} user | ${YQ} '.ssh_authorized_keys[]' - 2> /dev/null) ]];then
-	ssh_authorized_keys="$(qm cloudinit dump ${vmid} user | ${YQ} '.ssh_authorized_keys[]' - | sed -e 's/^/        - "/' -e 's/$/"/')"
+	ssh_authorized_keys="$(qm cloudinit dump ${vmid} user | ${YQ} '.ssh_authorized_keys[]' - | sed 's/^/        - /')"
 	else
 		echo
 		echo -e "No ssh_authorized_keys found."
@@ -119,7 +119,8 @@ passwd:
       gecos: "Flatcar Administrator"
       password_hash: "${cipasswd}"
       groups: [ "sudo", "docker", "adm", "wheel", "systemd-journal" ]
-      ssh_authorized_keys: "${ssh_authorized_keys}"
+      ssh_authorized_keys: 
+      "${ssh_authorized_keys}"
 
 " >> ${FCAR_FILES_PATH}/${vmid}.yaml
 	echo "[done]"
