@@ -5,6 +5,11 @@
   ---
   ---
 ---
+## V1.0.1 (14/09/2022)
+---
+### Enhancements:
+- **Updated for Proxmox 7.2**
+
 
 ## v1.0.0 (10/11/2021)
 ---
@@ -28,7 +33,7 @@
 - Cloned VM from template don't update it's ignition file when modifying CloudInit config in Proxmox VE GUI
 - If not shared storage is used to deploy template VM you can only deploy VM on same host as template VM (can't migrate)
 - Only IPv4 is supported
-
+- Only one nameserver supported
 ---
 
 ### Future features
